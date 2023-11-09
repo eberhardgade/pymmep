@@ -81,6 +81,26 @@ def get_time_slots(eaf):
 
 
 
+def make_time_slot_dictionary(time_slot_list):
+    """
+    Takes a list of time slots and returns a dictionary containing their IDs as keys and time values in milliseconds as values.
+    
+    Input: [lxml.etree._Element] with tag TIME_SLOT and attributes 'TIME_SLOT_ID' and 'TIME_VALUE'; as delivered by get_time_slots() in this module
+    Output: {'ID': Value}
+    - Keys are strings
+    - Values are ints
+    """
+    
+    time_slot_dictionary = {}
+
+    for time_slot in time_slot_list:
+        time_slot_dictionary[time_slot.attrib['TIME_SLOT_ID']] = int(time_slot.attrib['TIME_VALUE'])
+        
+    return time_slot_dictionary  
+
+
+
+
 def xml_formatted_uuid():
     """
     Generate a UUID and return it prepended with "i-" and formatted as a string
